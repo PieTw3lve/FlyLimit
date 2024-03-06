@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.pietw3lve</groupId>
-	<artifactId>flylimit</artifactId>
+	<artifactId>FlyLimit</artifactId>
 	<version>1.0.0</version>
 
 	<properties>
