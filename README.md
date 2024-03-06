@@ -5,7 +5,7 @@
 ![Bukkit](https://img.shields.io/badge/Bukkit-blue.svg)
 ![PaperMC](https://img.shields.io/badge/Paper-004ee9.svg)
 
-A Minecraft plugin that grants players temporary flight capabilities for a limited duration.
+A Minecraft plugin that grants players temporary flight.
 
 ### Information
 * **Simplicity of Configuration:** Thanks to clear documentation, even people without advanced knowledge can easily adapt the plugin to their own needs.
