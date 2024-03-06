@@ -62,6 +62,10 @@ public class FlyLimitPlugin extends JavaPlugin {
         return landsApi;
     }
 
+    public void setLandsApi(LandsIntegration landsApi) {
+        this.landsApi = landsApi;
+    }
+
     public boolean isLandsIntegration() {
         return landsIntegration;
     }
@@ -96,9 +100,5 @@ public class FlyLimitPlugin extends JavaPlugin {
 
     public void setConfigManager(ConfigManager configManager) {
         this.configManager = configManager;
-    }
-
-    public void setLandsApi(LandsIntegration landsApi) {
-        this.landsApi = landsApi;
     }
 }

@@ -18,8 +18,8 @@ The FlyLimit plugin provides players with a balanced fly command, enhancing game
 * **Lands Support:** Seamless integration with [Lands](https://www.spigotmc.org/resources/lands-%E2%AD%95-land-claim-plugin-%E2%9C%85-grief-prevention-protection-gui-management-nations-wars-1-20-support.53313/) plugin, enhancing land management and protection capabilities.
 
 ### Preview
-* #### Fly Timer
-![gif](assets/fly.gif)
+* #### Flight Timer
+<img src="assets/fly.gif" width="500">
 
 ### Command permissions
 | Command               | Permission                  |
