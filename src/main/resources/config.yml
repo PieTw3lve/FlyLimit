@@ -1,0 +1,16 @@
+ranks:
+  default:
+    permission: flylimit.default
+    weight: 0
+    flight-speed: 0.1
+    flight-timer: 30
+  staff:
+    permission: flylimit.staff
+    weight: 1
+    flight-speed: 0.1
+    flight-timer: 45
+  admin:
+    permission: flylimit.admin
+    weight: 2
+    flight-speed: 0.1
+    flight-timer: 60

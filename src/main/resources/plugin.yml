@@ -1,0 +1,20 @@
+name: FlyLimit
+main: com.github.pietw3lve.flylimit.FlyLimitPlugin
+version: 1.0.0
+api-version: 1.15
+authors: ["PieTw3lve"]
+website: https://github.com/PieTw3lve/FlyLimit
+description: Gain the ability to fly for a limited time.
+commands:
+  fly:
+    description: Toggles flight for the player.
+    usage: /fly
+    aliases: []
+    permission: flylimit.fly
+    permission-message: §cYou do not have permission.
+  flreload:
+    description: Reload FlyLimit configuration.
+    usage: flreload
+    aliases: []
+    permission: flylimit.reload
+    permission-message: §cYou do not have permission.
