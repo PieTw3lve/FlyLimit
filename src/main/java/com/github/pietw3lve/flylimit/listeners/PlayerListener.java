@@ -27,34 +27,70 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         UUID playerUuid = player.getUniqueId();
-        LandWorld world = plugin.getLandsApi().getWorld(player.getWorld());
-        if (world != null) {
-            if (world.hasRoleFlag(playerUuid, player.getLocation(), Flags.FLY) && plugin.getFlightPlayers().contains(playerUuid) && player.isOnGround()) {
-                enableFlight(player);
-            }
+        
+        if (shouldEnableFlight(playerUuid)) {
+            enableFlight(player);
         }
     }
 
     @EventHandler
     public void onPlayerFlight(PlayerToggleFlightEvent event) {
         Player player = event.getPlayer();
-        UUID playerUuid = player.getUniqueId();
-        LandWorld world = plugin.getLandsApi().getWorld(player.getWorld());
-        if (world != null) {
-            if (world.hasRoleFlag(playerUuid, player.getLocation(), Flags.FLY) && plugin.getFlightPlayers().contains(playerUuid) && !plugin.getFlightCountdownTaskIDs().containsKey(playerUuid)) {
-                int taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new FlightCountdown(plugin, player, plugin.getConfigManager().getFlightTimer(player)), 20L, 20L);
-                plugin.getFlightCountdownTaskIDs().put(playerUuid, taskID);
-            }
+        if (shouldStartFlightTimer(player)) {
+            startFlightTimer(player);
         }
     }
 
-    public void enableFlight(Player player) {
+    private boolean shouldEnableFlight(UUID playerUuid) {
+        Player player = Bukkit.getPlayer(playerUuid);
+        if (player == null) return false;
+        
+        if (plugin.isLandsIntegration()) {
+            LandWorld world = plugin.getLandsApi().getWorld(player.getWorld());
+            if (world != null && world.hasRoleFlag(playerUuid, player.getLocation(), Flags.FLY) &&
+                    plugin.getFlightPlayers().contains(playerUuid) && player.isOnGround()) {
+                return true;
+            }
+        } else {
+            if (plugin.getFlightPlayers().contains(playerUuid) && player.isOnGround()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean shouldStartFlightTimer(Player player) {
+        UUID playerUuid = player.getUniqueId();  
+        if (plugin.isLandsIntegration()) {
+            LandWorld world = plugin.getLandsApi().getWorld(player.getWorld());
+            if (world != null && world.hasRoleFlag(playerUuid, player.getLocation(), Flags.FLY) &&
+                    plugin.getFlightPlayers().contains(playerUuid) && !plugin.getFlightCountdownTaskIDs().containsKey(playerUuid)) {
+                return true;
+            }
+        } else {
+            if (plugin.getFlightPlayers().contains(playerUuid) && !plugin.getFlightCountdownTaskIDs().containsKey(playerUuid)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void enableFlight(Player player) {
         UUID playerUuid = player.getUniqueId();
         player.setAllowFlight(true);
         player.setFlySpeed(plugin.getConfigManager().getFlightSpeed(player));
+        cancelFlightTimer(playerUuid);
+    }
+
+    private void startFlightTimer(Player player) {
+        UUID playerUuid = player.getUniqueId();
+        int taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new FlightCountdown(plugin, player, plugin.getConfigManager().getFlightTimer(player)), 20L, 20L);
+        plugin.getFlightCountdownTaskIDs().put(playerUuid, taskID);
+    }
+
+    private void cancelFlightTimer(UUID playerUuid) {
         if (plugin.getFlightCountdownTaskIDs().containsKey(playerUuid)) {
             Bukkit.getScheduler().cancelTask(plugin.getFlightCountdownTaskIDs().remove(playerUuid));
-            plugin.getFlightCountdownTaskIDs().remove(playerUuid);
         }
     }
 }

@@ -15,26 +15,42 @@ import me.angeschossen.lands.api.LandsIntegration;
 public class FlyLimitPlugin extends JavaPlugin {
 
     private LandsIntegration landsApi;
-    private Set<UUID> flightPlayers;
-    private Map<UUID, Integer> flightCountdownTaskIDs;
+    private boolean landsIntegration;
+    private Set<UUID> flightPlayers = new HashSet<>();
+    private Map<UUID, Integer> flightCountdownTaskIDs = new HashMap<>();
     private ConfigManager configManager;
 
     @Override
     public void onEnable() {
-        landsApi = LandsIntegration.of(this);
-    
+        // Integrations
+        initializeLandsIntegration();
+        // Config
         saveDefaultConfig();
-        flightPlayers = new HashSet<>();
-        flightCountdownTaskIDs = new HashMap<>();
-        configManager = new ConfigManager(getConfig());
-
+        setConfigManager(new ConfigManager(getConfig()));
+        // Events
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        // Commands
         getCommand("fly").setExecutor(new Fly(this));
         getCommand("flreload").setExecutor(new Reload(this));
     }
 
     @Override
     public void onDisable() {
+        cancelFlightTasks();
+    }
+
+    private void initializeLandsIntegration() {
+        try {
+            landsApi = LandsIntegration.of(this);
+            landsIntegration = true;
+            this.getLogger().info("Lands plugin was found.");
+        } catch (NoClassDefFoundError | NoSuchMethodError e) {
+            landsIntegration = false;
+            this.getLogger().info("Lands plugin is not found or incompatible.");
+        }
+    }
+
+    private void cancelFlightTasks() {
         for (int taskId : flightCountdownTaskIDs.values()) {
             Bukkit.getScheduler().cancelTask(taskId);
         }
@@ -46,8 +62,16 @@ public class FlyLimitPlugin extends JavaPlugin {
         return landsApi;
     }
 
-    public void setLandsApi(LandsIntegration landsApi) {
-        this.landsApi = landsApi;
+    public boolean isLandsIntegration() {
+        return landsIntegration;
+    }
+
+    public boolean getLandsIntegration() {
+        return this.landsIntegration;
+    }
+
+    public void setLandsIntegration(boolean landsIntegration) {
+        this.landsIntegration = landsIntegration;
     }
 
     public Set<UUID> getFlightPlayers() {
@@ -62,7 +86,7 @@ public class FlyLimitPlugin extends JavaPlugin {
         return flightCountdownTaskIDs;
     }
 
-    public void setFlightCountdownTaskIDs(Map<UUID, Integer> flightCountdownTaskIDs) {
+    public void setFlightCountdownTaskIDs(Map<UUID,Integer> flightCountdownTaskIDs) {
         this.flightCountdownTaskIDs = flightCountdownTaskIDs;
     }
 
@@ -72,5 +96,9 @@ public class FlyLimitPlugin extends JavaPlugin {
 
     public void setConfigManager(ConfigManager configManager) {
         this.configManager = configManager;
+    }
+
+    public void setLandsApi(LandsIntegration landsApi) {
+        this.landsApi = landsApi;
     }
 }

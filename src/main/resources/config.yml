@@ -1,3 +1,12 @@
+# Configuration file for FlyLimit plugin
+
+# Ranks Configuration:
+# Each rank defines permissions, weight, flight speed, and flight timer.
+# Permission specifies the permission node associated with each rank.
+# Higher weight values indicate higher priority.
+# Flight speed ranges from -1 (slowest) to 1 (fastest), with 0.1 representing creative flight speed.
+# Flight timer sets the duration (in seconds) for each rank's flight before auto-disabling.
+
 ranks:
   default:
     permission: flylimit.default
