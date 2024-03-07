@@ -1,11 +1,11 @@
 <h1 align="center">FlyLimit</h1>
 
 <p align="center">
-	<img src="https://github.com/PieTw3lve/FlyLimit/actions/workflows/maven.yml/badge.svg" alt="Build and Publish">
-  <img src="https://img.shields.io/github/v/release/PieTw3lve/FlyLimit" alt="GitHub release (latest by date)">
+	<a href="https://github.com/PieTw3lve/FlyLimit/actions/workflows/maven.yml"><img src="https://github.com/PieTw3lve/FlyLimit/actions/workflows/maven.yml/badge.svg" alt="Build and Publish"></a>
+	<a href="https://github.com/PieTw3lve/FlyLimit/releases"><img src="https://img.shields.io/github/v/release/PieTw3lve/FlyLimit" alt="GitHub release (latest by date)">
 	<img src="https://img.shields.io/badge/Minecraft-1.15.2--1.20.4-orange.svg" alt="Supported versions">
 	<img src="https://img.shields.io/badge/SpigotMC-yellow.svg" alt="SpigotMC">
-  <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a>
+	<a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a>
 </p>
 
 ### Information
