@@ -25,10 +25,8 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        UUID playerUuid = player.getUniqueId();
-        
-        if (shouldEnableFlight(playerUuid)) {
+        Player player = event.getPlayer(); 
+        if (shouldEnableFlight(player)) {
             enableFlight(player);
         }
     }
@@ -41,10 +39,8 @@ public class PlayerListener implements Listener {
         }
     }
 
-    private boolean shouldEnableFlight(UUID playerUuid) {
-        Player player = Bukkit.getPlayer(playerUuid);
-        if (player == null) return false;
-        
+    private boolean shouldEnableFlight(Player player) {
+        UUID playerUuid = player.getUniqueId();
         if (plugin.isLandsIntegration()) {
             LandWorld world = plugin.getLandsApi().getWorld(player.getWorld());
             if (world != null && world.hasRoleFlag(playerUuid, player.getLocation(), Flags.FLY) &&
