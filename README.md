@@ -1,6 +1,6 @@
 # FlyLimit
 ![JDK](https://img.shields.io/badge/JDK-1.17-blue.svg)
-![Supported versions](https://img.shields.io/badge/Minecraft-1.20--1.20.4-green.svg)
+![Supported versions](https://img.shields.io/badge/Minecraft-1.15.2--1.20.4-green.svg)
 ![SpigotMC](https://img.shields.io/badge/SpigotMC-yellow.svg)
 ![Bukkit](https://img.shields.io/badge/Bukkit-blue.svg)
 ![PaperMC](https://img.shields.io/badge/Paper-004ee9.svg)
