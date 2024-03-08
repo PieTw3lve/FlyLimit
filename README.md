@@ -35,5 +35,4 @@
 
 ### Reporting issues
 
-Should you have any suggestions or encounter a bug, we kindly request that you report it through [this](https://github.com/PieTw3lve/FlyLimit/issues).
-Your feedback is greatly appreciated.
+- If you encounter any issues with the plugin, please report them [here](https://github.com/PieTw3lve/FlyLimit/issues).
